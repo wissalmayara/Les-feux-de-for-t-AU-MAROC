@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Surface brulée</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+
+        <style type="text/css">
+          html, body { margin: 0px; padding: 1; height: 100%; }
+          #map  {
+                  width: 900px;
+                  height: 580px;
+                  margin: 15px auto
+                }
+          
+        </style>
+
+    </head>
+
+    <body>
+        
+        <img src="Capture1.png" alt="fire" >
+        <h2 style="font-family: 'Open Sans', sans-serif; letter-spacing: normal;  width:500px;
+        margin: 0 auto; text-align: center;" class="text-capitalize">Incendies des forêts au Maroc</h2>
+        <p style="margin: 0 auto; text-align: center;" >L'augmentation de la température due au changement climatique peut contribuer </b> <br /> à l’accroissement des incendies avec des impacts négatifs sur la biodiversité et les ressources forestières.</p>
+
+      
+        <div id="map"></div>
+        <script type="text/javascript" src="regions.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+          var map = L.map('map', {
+              center: [29, -5],
+              zoom: 5
+          });
+
+          L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+           attribution: 'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+           maxZoom: 11,
+           minZoom: 4
+         }).addTo(map);
+          
+          function Monstyle(feature) {
+            return {
+              weight: 2,
+              opacity: 1,
+              color: '#5a5e5f',
+              dashArray: '3',
+              fillOpacity: 0.8,
+              fillColor: '#b3bcbe'
+            };
+          } 
+
+          var geojson = L.geoJson(regions, {
+            style: Monstyle}).addTo(map);
+
+         //Upload Geojson File
+         
+			$.getJSON("https://raw.githubusercontent.com/Wima7/InfoCovid/main/Burned.geojson")
+			.done(function(data) {
+			    var info = processData(data);
+			    createPropSymbols(info.timestamps, data);
+          createLegend(info.min,info.max);
+			    createSliderUI(info.timestamps);
+          
+			});
+
+        // Process Data
+        function processData(data) {
+          
+          var timestamps = [];  
+          var	min = Infinity; 
+          var	max = -Infinity;
+
+          
+          for (var feature in data.features) {
+              var properties = data.features[feature].properties;
+
+              
+              for (var attribute in properties) {
+                  if ( attribute != 'FID_' &&
+                       attribute != 'Id' &&
+                       attribute != 'Nom' &&
+                       attribute != 'Lat' &&
+                       attribute != 'Lon' )   
+                  {
+                      if ( $.inArray(attribute,timestamps) ===  -1) { 
+                                                        
+
+                          timestamps.push(attribute);  
+                      }
+                      if (properties[attribute] < min) {
+                          min = properties[attribute]; 
+                      }
+                      if (properties[attribute] > max) {
+                          max = properties[attribute]; 
+                      }
+                  }
+              }
+          }
+          return { 
+              timestamps : timestamps,
+              min : min,
+              max : max
+          }
+        }
+
+        // Create Propotional Symbols
+        function createPropSymbols(timestamps, data) {
+
+          regions = L.geoJson(data, {
+
+              
+              pointToLayer: function(feature, latlng) {
+                  return L.circleMarker(latlng, { // we use circle marker for the points
+                      fillColor: "#A30000",  // fill color of the circles
+                      color: '#A30000',      // border color of the circles
+                      weight: 3,             // circle line weight in pixels
+                      fillOpacity: 0.5       // fill opacity (0-1)
+                  }).on({
+                        mouseover: function(e) {
+                            this.openPopup();
+                            this.setStyle({fillColor: 'black'});  // fill color turns black when mouseover
+                        },
+                        mouseout: function(e) {
+                            this.closePopup();
+                            this.setStyle({fillColor: '#A30000'});  // fill turns original color when mouseout
+                        }
+                });
+              }
+          }).addTo(map);
+
+          updatePropSymbols(timestamps[0]); 
+        }
+
+        // Update Propotional Symbols
+        function updatePropSymbols(timestamp) {
+
+          regions.eachLayer(function(layer) {  
+
+              var props = layer.feature.properties;  
+              var radius = calcPropRadius(props[timestamp]); 
+
+              
+              var popupContent = '<b> Région : <b>' + props.Nom + '</b> <br />Surface Forestière Brulée : ' + String(props[timestamp]) + ' '+ 'Ha' ;
+
+              layer.setRadius(radius);  
+              layer.bindPopup(popupContent, { offset: new L.Point(0,-radius), autoPan: false }); 
+          });
+        }
+
+        
+        function calcPropRadius(attributeValue) {
+
+          var scaleFactor = 1;   
+          var area = attributeValue * scaleFactor;
+
+          return Math.sqrt(area/Math.PI);  
+        }
+
+
+        function createLegend(min, max) {
+                if (min < 1000) { 
+                    min = (1000); 
+                }
+                function roundNumber(inNumber) {
+                     return (Math.round(inNumber/10) * 10);
+                }
+                var legend = L.control( { position: 'bottomright'} );    
+                legend.onAdd = function(map) {
+
+                var legendContainer = L.DomUtil.create("div", "legend");
+                var symbolsContainer = L.DomUtil.create("div", "symbolsContainer");
+                var classes = [roundNumber(min), roundNumber((max-min)/2), roundNumber(max)]; 
+                var legendCircle;
+                var lastRadius = 0;
+                var currentRadius;
+                var margin;
+                L.DomEvent.disableClickPropagation(legendContainer);; 
+                $(legendContainer).append("<h3 id='legendTitle'>Surface Brulée Par Région</h3>");
+
+                for (var i = 0; i <= classes.length-1; i++) {
+
+                    legendCircle = L.DomUtil.create("div", "legendCircle");
+                    currentRadius = calcPropRadius(classes[i]);
+                    margin = -currentRadius - lastRadius - 2;
+                    $(legendCircle).attr("style", "width: " + currentRadius*2 +
+                        "px; height: " + currentRadius*2 + 
+                        "px; margin-left: " + margin + "px" );
+                    $(legendCircle).append("<span       class='legendValue'>"+ classes[i] + '   '+ 'Ha' +"</span>");
+                    $(symbolsContainer).append(legendCircle);
+                    lastRadius = currentRadius;
+                }
+                $(legendContainer).append(symbolsContainer);
+                return legendContainer; 
+                };
+                legend.addTo(map);} // end createLegend() 
+
+
+
+    // Creation of the Slider
+		function createSliderUI(timestamps) {
+		  var sliderControl = L.control({ position: 'bottomleft'} ); 
+		  sliderControl.onAdd = function(map) {
+		    
+		      var slider = L.DomUtil.create("input", "range-slider");
+		      L.DomEvent.addListener(slider, 'mousedown', function(e) {
+		          L.DomEvent.stopPropagation(e);
+		      });
+
+		    var labels = ["2009", "2010","2011","2012", "2013", "2014", "2015","2016", "2017", "2018", "2019", "2020" ];
+
+		    $(slider)
+		        .attr({
+		          'type':'range',
+		          'max': timestamps[timestamps.length-1],
+		          'min':timestamps[0],
+		          'step': 1, 
+		          'value': String(timestamps[0])})
+		        .on('input change', function() {
+		            updatePropSymbols($(this).val().toString()); 
+		            var i = $.inArray(this.value,timestamps);
+		            $(".temporal-legend").text(labels[i]); 
+		        });
+		    return slider;
+		  }
+		  sliderControl.addTo(map);
+		  createTimeLabel(timestamps[0]); 
+		  }
+
+
+      // Create a Legend for the Slider
+
+		  function createTimeLabel(startTimestamp) {
+		    var temporalLegend = L.control({position: 'bottomleft' }); 
+		    temporalLegend.onAdd = function(map) {
+		      var output = L.DomUtil.create("output", "temporal-legend");
+		      $(output).text(startTimestamp);
+		      return output;
+		    }
+		    temporalLegend.addTo(map);
+		  }
+
+
+
+
+		});
+
+        </script>
+   </body>
+</html>

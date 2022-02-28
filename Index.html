@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Wildfires In Morroco </title>
+        <!-- Firelogo-->
+        <link rel="icon" type="image/x-icon" href="assets/TEST2.jpg" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Leaflet-->
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ms-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#À propos">À propos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#portfolio">Maps</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#Données">Données</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Masthead-->
+        <header class="masthead" style="background-image:url('assets/img/wildfire.jpg');margin-bottom: 0px;">
+            <div class="container">
+                <div class="masthead-subheading">Les feux de forêt  </div>
+                <div class="masthead-heading text-uppercase">au Maroc</div>
+                <a class="btn btn-primary btn-xl text-uppercase" href="#À propos">Tell Me More</a>
+            </div>
+        </header>
+        <!-- A Propos -->
+        <section class="page-section" id="À propos">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">À propos</h2>
+                    <h3 class="section-subheading text-muted">Ce Géoportail est conçu pour vous permettre une visualisation intelligente des données dans les 12 régions du Maroc.</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-map fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="nav-item"><a class="nav-link" href="#portfolio">Maps</a></h4>
+                        <p class="text-muted">La cartographie des zones brulées permet de suivre l’évolution des zones brûlées et contribue à l’élaboration et à la mise à jour des plans de prévention des risques</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-fire fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="nav-item"><a class="nav-link" href="https://github.com/wissalmayara/Les-feux-de-for-t-AU-MAROC.git">Documentation</a></h4>
+                        <p class="text-muted">Les feux de forêt font partie des risques majeurs dans les écosystèmes forestiers. Chaque année, de nombreux hectares partent en fumée. </p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-table fa-stack-1x fa-inverse"></i>
+                        </span>
+         
+                        <h4 class="nav-item"><a class="nav-link" href="#Données">Données</a></h4>
+                        <p class="text-muted">Les données utilisées pour la réalisation du présent travail sont de sources et formats différents et elles sont complétées avec des métadonnées suivant la norme ISO 19115</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Portfolio Grid-->
+        <section class="page-section bg-light" id="portfolio">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Maps</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 1-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/surface brulée réel.jpg" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">La surface forêstière brulée</div>
+                                <div class="portfolio-caption-subheading text-muted"> Carte à Symboles Proportionnels </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 2-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/nbre.webp" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Le nombre de feux par an</div>
+                                <div class="portfolio-caption-subheading text-muted">Carte choroplèthe</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <!-- Portfolio item 3-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/defore.webp" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Déforestation par incendie</div>
+                                <div class="portfolio-caption-subheading text-muted">Raster</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+                        <!-- Portfolio item 4-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/couv_raster.jpg" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">L'évolution de la surface forestière brulée </div>
+                                <div class="portfolio-caption-subheading text-muted">Carte dynamique</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                        <!-- Portfolio item 5-->
+                        <div class="portfolio-item">
+                            <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
+                                <div class="portfolio-hover">
+                                    <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                                </div>
+                                <img class="img-fluid" src="assets/img/chemin.jpg" class="img" alt="..." />
+                            </a>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Le chemin le plus optimal: les casernes de pompier et l'incendie</div>
+                                <div class="portfolio-caption-subheading text-muted">Analyse spatiale.</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Données-->
+        <section class="page-section" id="Données">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Données</h2>
+                    <h3 class="section-subheading text-muted">Les données utilisées pour la réalisation du présent travail sont de sources et formats différents:</h3>
+                </div>
+                <ul class="timeline">
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/shapfile_burned.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Shapefile</h4>
+                                <h4 class="subheading">La surface forêstière brulée</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">On a pu extraire le shapefile de la surface forestière brulée par région pour chaque année en exploitant les données de Modis burnt areas et les données SIREDD.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/shapefile nombre de feux.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Shapefile </h4>
+                                <h4 class="subheading">Le nombre d’incendies par an.</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">On a pu extraire le shapefile du nombre d’incendies occurrents par an en exploitant les données de Modis burnt areas et les données SIREDD.</p></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/Les satation.png" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Shapefile</h4>
+                                <h4 class="subheading">Les Casernes de pompiers</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">     Il s’agit d’un shapefile comportant les coordonnées des casernes de pompiers au Maroc. </p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/deforestation-raster.jpg" alt="..." /></div>
+                        <div class="timeline-panel">
+                            <div class="timeline-heading">
+                                <h4>Raster</h4>
+                                <h4 class="subheading">Déforestation</h4>
+                            </div>
+                            <div class="timeline-body"><p class="text-muted">Ces données sont des résultats de l'analyse de times-series d'images Landsat caractérisant l'étendue et le changement des forêts(déforestation) causé par les incendies. Et sont accessibles via le site de Global Forest Change.</p></div>
+                        </div>
+                    </li>
+                    <li class="timeline-inverted">
+                        <div class="timeline-image">
+                            <p>
+                                Ces 
+                                <br />
+                                données sont 
+                                <br />
+                                normalisées suivant
+                                <br />
+                                la norme ISO 19115
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <!-- Team-->
+        <section class="page-section bg-light" id="team">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Team</h2>
+                    <h3 class="section-subheading text-muted">Ce travail est réalisé par:</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="rounded-circle img-fluid" src="assets/img/team/WIS.jpg" alt="..." />
+                            <h4>MAYARA Wissal</h4>
+                            <p class="text-muted">élève ingénieure en 3ème année CI à IAV Hassan II</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/wissalmayara"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/wissal-mayara-42b749224/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <img class="rounded-circle img-fluid" src="assets/img/team/Wiame.jpg" alt="..." />
+                            <h4>NEHARI Wiame</h4>
+                            <p class="text-muted">élève ingénieure en 3ème année CI à IAV Hassan II</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://github.com/Wiamenehari"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/wiame-nehari99/"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                            <img src="assets/img/team/ess.png" alt="..." />
+                            <h4>Pr.HAJJI Hicham</h4>
+                            <p class="text-muted">Encadrant</p>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fa fa-envelope"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
+                            <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Projet de Web Mapping 2022</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact-->
+        <section class="page-section" id="contact">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Contacter nous</h2>
+                </div>
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- * * SB Forms Contact Form * *-->
+                <!-- * * * * * * * * * * * * * * *-->
+                <!-- This form is pre-integrated with SB Forms.-->
+                <!-- To make this form functional, sign up at-->
+                <!-- https://startbootstrap.com/solution/contact-forms-->
+                <!-- to get an API token!-->
+                <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <div class="row align-items-stretch mb-5">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <!-- Name input-->
+                                <input class="form-control" id="name" type="text" placeholder="Your Name *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                            </div>
+                            <div class="form-group">
+                                <!-- Email address input-->
+                                <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
+                                <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
+                                <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                            </div>
+                            <div class="form-group mb-md-0">
+                                <!-- Phone number input-->
+                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" data-sb-validations="required" />
+                                <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group form-group-textarea mb-md-0">
+                                <!-- Message input-->
+                                <textarea class="form-control" id="message" placeholder="Your Message *" data-sb-validations="required"></textarea>
+                                <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Submit success message-->
+                    <!---->
+                    <!-- This is what your users will see when the form-->
+                    <!-- has successfully submitted-->
+                    <div class="d-none" id="submitSuccessMessage">
+                        <div class="text-center text-white mb-3">
+                            <div class="fw-bolder">Form submission successful!</div>
+                            To activate this form, sign up at
+                            <br />
+                            <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
+                        </div>
+                    </div>
+                    <!-- Submit error message-->
+                    <!---->
+                    <!-- This is what your users will see when there is-->
+                    <!-- an error submitting the form-->
+                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                    <!-- Submit Button-->
+                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Send Message</button></div>
+                </form>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-start">Copyright &copy; MAYARA Wissal et NEHARI Wiame</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-end">
+                        <a class="link-dark text-decoration-none me-3" href="#!">ESGIT</a>
+                        <a class="link-dark text-decoration-none" href="#!">IAV Hassan II</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Portfolio Modals-->
+        <!-- Portfolio item 1 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">La surface forestière brûlée.</h2>
+                                    <p class="item-intro text-muted">Cartes à Symboles Proportionnels.</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/Surface.png" alt="..." />
+                                    <p>C'est une carte en symboles proportionnels représentant la valeur de la surface forestière brulée par région pour chaque année depuis 2009 jusqu’à 2020.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a>Pour plus de détails:</a>
+                                        </li> 
+                                        <li>
+                                            <a class="nav-link" href="Burned Area.html">Visualiser la Carte</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Fermer ce Projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 2 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">Le nombre de feux par an.</h2>
+                                    <p class="item-intro text-muted">Carte choroplèthe.</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/nbre-map.PNG" alt="..." />
+                                    <p>C'est une carte choroplèthe représentant le nombre d'incendie occurrents par région pour chaque année depuis 2009 jusqu’à 2020.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a>Pour plus de détails:</a>
+                                        </li> 
+                                        <li>
+                                            <a class="nav-link" href="Nombre de feux/Nombre.html">Visualiser la Carte</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Fermer ce projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 3 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">La perte en couverture forestière.</h2>
+                                    <p class="item-intro text-muted">Raster</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/deforestation-raster.jpg" alt="..." />
+                                    <p>C'est un fichier Raster qui mit en évidence la perte des surfaces forestières pendant l’année 2019.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a>Pour plus de détails:</a>
+                                        </li> 
+                                        <li>
+                                            <a class="nav-link" href="Raster1/Raster1/index.html">Visualiser la Carte</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Fermer ce projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 4 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h2 class="text-uppercase">L'évolution de la surface brulée</h2>
+                                    <p class="item-intro text-muted">Carte dynamique</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/evolution.jpg" alt="..." />
+                                    <p>Cette carte dynamique a pour objectif de mettre en évidance l'évolution de la surface forestière brulée au maroc depuis 2009 jusqu'à 2022.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a>Pour plus de détails:</a>
+                                        </li> 
+                                        <li>
+                                            <a class="nav-link" href="Leaflet.timeline-master/Leaflet.timeline-master/Leaflet.timeline-master/docs/examples/borders.html">accéder à la Carte</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Fermer ce projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Portfolio item 5 modal popup-->
+        <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="close-modal" data-bs-dismiss="modal"><img src="assets/img/close-icon.svg" alt="Close modal" /></div>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <div class="modal-body">
+                                    <!-- Project details-->
+                                    <h3 class="text-uppercase">Le chemin le plus optimal entre les casernes de pompier et l'incendie</h3>
+                                    <p class="item-intro text-muted">Analyse spatiale.</p>
+                                    <img class="img-fluid d-block mx-auto" src="assets/img/route image.PNG" alt="..." />
+                                    <p>C'est une carte de navigation qui trouve un itinéraire entre deux endroits sélectionnés par l'utilisateur et détecte si cet itinéraire est optimal en tenant compte du trafic et des incidents.</p>
+                                    <ul class="list-inline">
+                                        <li>
+                                            <a>Pour plus de détails:</a>
+                                        </li> 
+                                        <li>
+                                            <a class="nav-link" href="route/route/protection civil/ROUTE..html">accéder à la Carte</a>
+                                        </li>
+                                    </ul>
+                                    <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                        <i class="fas fa-times me-1"></i>
+                                        Fermer ce projet
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <!-- * *                               SB Forms JS                               * *-->
+        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>
