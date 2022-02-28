@@ -1,0 +1,26 @@
+{
+"type": "FeatureCollection",
+"name": "ProtectionCivile",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "Location": "Tanger"}, "geometry": { "type": "Point", "coordinates": [ -5.799174335446662, 35.74257877422378] } },
+{ "type": "Feature", "properties": { "Id": 1, "Location": "Tanger"}, "geometry": { "type": "Point", "coordinates": [ -5.777943066172628, 35.74104335994461] } },
+{ "type": "Feature", "properties": { "Id": 2, "Location": "M'diq"}, "geometry": { "type": "Point", "coordinates": [ -5.323308712861129, 35.685690201263746] } },
+{ "type": "Feature", "properties": { "Id": 3, "Location": "Martil"}, "geometry": { "type": "Point", "coordinates": [ -5.28260373291729, 35.62200118323468] } },
+{ "type": "Feature", "properties": { "Id": 4, "Location": "Mqrisat"}, "geometry": { "type": "Point", "coordinates": [ -5.349076127110724, 34.92528493401125] } },
+{ "type": "Feature", "properties": { "Id": 5, "Location": "Alhocima"}, "geometry": { "type": "Point", "coordinates": [ -3.8431744344127323, 35.17004550798952] } },
+{ "type": "Feature", "properties": { "Id": 6, "Location": "Midar"}, "geometry": { "type": "Point", "coordinates": [ -3.5232956349261344, 34.97043271662372] } },
+{ "type": "Feature", "properties": { "Id": 7, "Location": "Taounat"}, "geometry": { "type": "Point", "coordinates": [ -4.654795193312544, 34.54800091488103] } },
+{ "type": "Feature", "properties": { "Id": 8, "Location": "Alwahda"}, "geometry": { "type": "Point", "coordinates": [ -4.96861564374987, 34.53550443390788] } },
+{ "type": "Feature", "properties": { "Id": 9, "Location": "Allal Tazi"}, "geometry": { "type": "Point", "coordinates": [ -6.315432381787253, 34.56474110563427] } },
+{ "type": "Feature", "properties": { "Id": 10, "Location": "Sidi Slimane"}, "geometry": { "type": "Point", "coordinates": [ -5.896373565079544, 34.291685673879314] } },
+{ "type": "Feature", "properties": { "Id": 11, "Location": "Tissa"}, "geometry": { "type": "Point", "coordinates": [ -4.668099907058233, 34.316623873504824] } },
+{ "type": "Feature", "properties": { "Id": 12, "Location": "Elhajeb"}, "geometry": { "type": "Point", "coordinates": [ -5.370170286691107, 33.7285611405167] } },
+{ "type": "Feature", "properties": { "Id": 13, "Location": "Meknes"}, "geometry": { "type": "Point", "coordinates": [ -5.519525868340311, 33.900707068506065] } },
+{ "type": "Feature", "properties": { "Id": 14, "Location": "Meknes"}, "geometry": { "type": "Point", "coordinates": [ -5.519525868340311, 33.900707068506065] } },
+{ "type": "Feature", "properties": { "Id": 15, "Location": "Meknes"}, "geometry": { "type": "Point", "coordinates": [ -5.543859541846189, 33.899163297813935] } } 
+]}
+
+
+
+
