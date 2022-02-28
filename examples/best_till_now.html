@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <title>Burn Scars Map</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="./leaflet.timeline.js"></script>
+
+    <style>
+      html,
+      body {
+        margin: 10px;
+        padding: 0;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      #map {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      .leaflet-bottom.leaflet-left {
+        width: 100%;
+      }
+      .leaflet-control-container .leaflet-timeline-controls {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+
+       
+
+
+    <div id="map" ></div>
+
+    <script>
+      
+      var osmUrl = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png";
+      var osmAttrib =
+        'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.';
+      var osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
+      var map = L.map("map", {
+        layers: [osm],
+        center: [33, -6],
+        zoom: 7,
+      });
+      var timeline;
+      var timelineControl;
+
+      function onLoadData(data) {
+        timeline = L.timeline(data, {
+          style: function (data) {
+            return {
+              stroke: true,
+              color: "#A30000",
+              fillOpacity: 0.5,
+            };
+          },
+          waitToUpdateMap: true,
+
+          onEachFeature: function (feature, layer) {
+            layer.bindTooltip( '<b> Province : <b>' + feature.properties.PROVINCE + '</b> <br />Surface  Brulée : ' + feature.properties.AREA_HA + ' '+ 'Ha');
+          },
+        });
+
+        timelineControl = L.timelineSliderControl({
+          formatOutput: function (date) {
+            return new Date(date).toLocaleDateString();
+          },
+          enableKeyboardControls: true,
+          autoPlay: true,
+          steps: 100,
+        });
+        timeline.addTo(map);
+        timelineControl.addTo(map);
+        timelineControl.addTimelines(timeline);
+      }
+    </script>
+    <script src="test.geojson"></script>
+  </body>
+</html>

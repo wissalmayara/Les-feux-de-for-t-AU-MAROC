@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <title>Burn Scars Map</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="./leaflet.timeline.js"></script>
+    <link rel="stylesheet" href="css/ol2-sidebar.css" />
+
+    <style>
+      html,
+      body {
+        margin: 10px;
+        padding: 0;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      #map {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+      .leaflet-bottom.leaflet-left {
+        width: 100%;
+      }
+      .leaflet-control-container .leaflet-timeline-controls {
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+
+        <div id="sidebar" class="sidebar collapsed">
+                <!-- Nav tabs -->
+                <div class="sidebar-tabs">
+                    <ul role="tablist">
+                        <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                        <li><a href="#Données" role="tab"><i class="fa fa-database" aria-hidden="true"></i></a></li>
+                        <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+                        <li><a href="github.com" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+                    </ul>
+
+                    <ul role="tablist">
+                        <li><a href="#settings" role="tab"><i class="fa fa-gear"></i></a></li>
+                    </ul>
+                </div>
+
+                <!-- Tab panes -->
+                <div class="sidebar-content">
+                    <div class="sidebar-pane" id="home">
+                        <h1 class="sidebar-header">
+                            MODIS Burnt Areas
+                            <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                        </h1>
+
+                        <p>Cette carte dynamique a pour objectif de mettre en évidance l'évolution de la surface forestière brulée au maroc depuis 2009 jusqu'à 2022.</p>
+
+                        <p> L’incendie de forêt reste incontestablement un des facteurs de dégradation les plus dévastateurs dans le bassin méditerranéen, lequel est caractérisé par une végétation très inflammable et des conditions climatiques chaudes et sèches. Le Maroc, pays du pourtour méditerranéen, n’est pas épargné par ce fléau, avec plus de 50000 ha de forêts qui est partie en fumée cette dernière décennie.</p>
+
+
+                        <p>Le module d'évaluation rapide des dommages (RDA) de l'EFFIS a été initialement mis en œuvre en 2003 pour cartographier les zones brûlées pendant la saison des incendies, en analysant les images quotidiennes MODIS à une résolution spatiale de 250 mètres. Pour la surveillance des zones brûlées pendant l'été, les images quotidiennes des instruments MODIS à bord des satellites TERRA et AQUA sont acquises et traitées quelques heures après l'acquisition. L'évaluation rapide des dégâts par EFFIS fournit une mise à jour quotidienne des périmètres des zones brûlées en Europe et en Afrique du Nord pour les incendies d'environ 30 ha ou plus, deux fois par jour.</p>
+
+                  
+                    </div>
+
+                    <div class="sidebar-pane" id="Données">
+                        <h1 class="sidebar-header">
+                          Data Source : EFFIS .
+                          <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                        </h1>
+                        
+                        <p>Le système européen d'information sur les feux de forêt (EFFIS) soutient les services chargés de la protection des forêts contre les incendies dans l'UE et les pays voisins et fournit aux services de la Commission européenne et au Parlement européen des informations actualisées et fiables sur les feux de végétation en Europe.</p>
+                    </div>
+
+                    <div class="sidebar-pane" id="messages">
+                        <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                    </div>
+
+                    <div class="sidebar-pane" id="settings">
+                        <h1 class="sidebar-header">Settings<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+                        <p> Pour accedér à la documentation, vous pouvez consulter <a href="https://www.npmjs.com/package/leaflet.timeline" target=blank> Documentation </a></p>
+                    </div>
+                </div>
+            </div>
+
+
+    <div id="map" class="sidebar-map"></div>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
+    <script src="js/jquery-sidebar.js"></script>
+    
+
+
+
+    <script>
+      
+      var osmUrl = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png";
+      var osmAttrib =
+        'Map tiles by Carto, under CC BY 3.0. Data by OpenStreetMap, under ODbL.';
+      var osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
+      var map = L.map("map", {
+        layers: [osm],
+        center: [33, -6],
+        zoom: 7,
+      });
+      var sidebar = $('#sidebar').sidebar();
+      var timeline;
+      var timelineControl;
+
+      function onLoadData(data) {
+        timeline = L.timeline(data, {
+          style: function (data) {
+            return {
+              stroke: true,
+              color: "#A30000",
+              fillOpacity: 0.5,
+            };
+          },
+          waitToUpdateMap: true,
+
+          onEachFeature: function (feature, layer) {
+            layer.bindTooltip( '<b> Province : <b>' + feature.properties.PROVINCE + '</b> <br />Surface  Brulée : ' + feature.properties.AREA_HA + ' '+ 'Ha');
+          },
+        });
+
+        timelineControl = L.timelineSliderControl({
+          formatOutput: function (date) {
+            return new Date(date).toLocaleDateString();
+          },
+          enableKeyboardControls: true,
+          autoPlay: true,
+          steps: 100,
+        });
+        timeline.addTo(map);
+        timelineControl.addTo(map);
+        timelineControl.addTimelines(timeline);
+      }
+    </script>
+    <script src="test.geojson"></script>
+  </body>
+</html>
